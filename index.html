@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resize</title>
+    <style>
+        .col{
+            height:  109px;
+            width: 100px;
+            position: absolute;
+            background-color: red;
+        }
+
+        .resizer{
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: gray;
+            z-index: 2;
+        }
+        .resizer.nw{
+            top: -1px;
+            left: -1px;
+            cursor: nw-resize;
+        }
+        .resizer.ne{
+            top: -1px;
+            right: -1px;
+            cursor: ne-resize;
+        }
+        .resizer.nw{
+            top: -1px;
+            left: -1px;
+            cursor: nw-resize;
+        }
+        .resizer.nw{
+            top: -1px;
+            left: -1px;
+            cursor: nw-resize;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <h1>Div resizer</h1>
+
+    <div class="col">
+        <div class="resizer ne"></div>
+        <div class="resizer mw"></div>
+        <div class="resizer sw"></div>
+        <div class="resizer se"></div>
+    </div>
+
+    <script>
+        let col = document.querySelector(".col");
+        
+        // resizers
+        col.addEventListener("mousedown" , mousedown)
+        function mousedown(e){
+            
+            window.addEventListener('mousemove', mousemove)
+            window.addEventListener('mouseup', mouseup)
+
+            // current location
+            let prevX = e.clientX;
+            let prevY = e.clientY;
+
+            // moving the element
+            function mousemove(e){
+                let newX = prevX - e.clientX;
+                let newY = prevY - e.clientY;
+                
+                const rect = col.getBoundingClientRect();
+                
+                col.style.left = rect.left - newX + "px";
+                col.style.top = rect.top - newY + "px";
+
+                prevX = e.clientX;
+                prevY = e.clientY;
+            }
+
+            // setting to the new loaction
+            function mouseup(e){
+                window.removeEventListener('mousemove', mousemove)
+                window.removeEventListener('mouseup', mouseup)
+            }
+        }
+    </script>
+</body>
+</html>
