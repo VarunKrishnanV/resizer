@@ -30,15 +30,15 @@
             right: -1px;
             cursor: ne-resize;
         }
-        .resizer.nw{
-            top: -1px;
+        .resizer.sw{
+            bottom: -1px;
             left: -1px;
-            cursor: nw-resize;
+            cursor: sw-resize;
         }
-        .resizer.nw{
-            top: -1px;
-            left: -1px;
-            cursor: nw-resize;
+        .resizer.se{
+            bottom: -1px;
+            right: -1px;
+            cursor: se-resize;
         }
 
 
@@ -51,7 +51,7 @@
 
     <div class="col">
         <div class="resizer ne"></div>
-        <div class="resizer mw"></div>
+        <div class="resizer nw"></div>
         <div class="resizer sw"></div>
         <div class="resizer se"></div>
     </div>
@@ -88,6 +88,30 @@
             function mouseup(e){
                 window.removeEventListener('mousemove', mousemove)
                 window.removeEventListener('mouseup', mouseup)
+            }
+        }
+
+        const resizers = document.querySelectorAll(".resizer");
+        let currentResizer;
+        for(let resizer of resizers){
+            resizer.addEventListener("mousedown", mousedown)
+
+            function mousedown(e){
+
+                currentResizer = e.target;
+
+                let prevX = e.clientX;
+                let prevY = e.clientY;
+                
+                window.addEventListener("mousemove", mousemvoe);
+                window.addEventListener("mouseup", mouseup);
+
+                function mousemove(e){
+
+                }
+                function mouseup(e){
+
+                }
             }
         }
     </script>
